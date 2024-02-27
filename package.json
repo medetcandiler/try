@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "npm run runJson & next start",
+    "start": "npm run json & next start",
     "json": "json-graphql-server db.js --p 4002",
     "lint": "next lint"
   },
