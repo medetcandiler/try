@@ -1,18 +1,18 @@
-import { fetchEmployee } from "@/helpers/employee";
+"use client";
 import { redirect } from "next/navigation";
 import EmployeeInfoCard from "@/components/EmployeeInfoCard";
-import { getClient } from "@/lib/client";
 import { GET_EMPLOYEE_QUERY } from "@/constants";
+import { useSuspenseQuery } from "@apollo/client";
+import { IEmployee } from "@/helpers/employee/interface";
 
-const page = async ({ params }: { params: { id: string } }) => {
-  const { data } = await getClient().query({
-    query: GET_EMPLOYEE_QUERY,
-    variables: { id: params.id },
-  });
+const page = ({ params }: { params: { id: string } }) => {
+  const { data } = useSuspenseQuery<{ Employee: IEmployee }>(
+    GET_EMPLOYEE_QUERY,
+    {
+      variables: { id: params.id },
+    }
+  );
   const employee = data.Employee;
-
-  console.log(" data in dynamic", employee);
-
   if (employee === null) return redirect("/");
 
   return (
