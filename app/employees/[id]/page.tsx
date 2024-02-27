@@ -5,7 +5,7 @@ import { GET_EMPLOYEE_QUERY } from "@/constants";
 import { useSuspenseQuery } from "@apollo/client";
 import { IEmployee } from "@/helpers/employee/interface";
 
-const page = ({ params }: { params: { id: string } }) => {
+const Page = ({ params }: { params: { id: string } }) => {
   const { data } = useSuspenseQuery<{ Employee: IEmployee }>(
     GET_EMPLOYEE_QUERY,
     {
@@ -22,4 +22,4 @@ const page = ({ params }: { params: { id: string } }) => {
   );
 };
 
-export default page;
+export default Page;
