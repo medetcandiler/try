@@ -109,9 +109,9 @@ const Votes = styled.span`
 `;
 
 const EmployeeInfoCard: FC<{ employee: IEmployee }> = ({ employee }) => {
+  if (!employee) return null;
   const { name, email, avatar, birthdate, registeredAt, jobTitle, votes } =
     employee;
-
   return (
     <CardSection>
       <CardContainer>

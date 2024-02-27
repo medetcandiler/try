@@ -1,19 +1,20 @@
-"use client";
 import { redirect } from "next/navigation";
 import EmployeeInfoCard from "@/components/EmployeeInfoCard";
 import { GET_EMPLOYEE_QUERY } from "@/constants";
-import { useSuspenseQuery } from "@apollo/client";
-import { IEmployee } from "@/helpers/employee/interface";
 
-const Page = ({ params }: { params: { id: string } }) => {
-  const { data } = useSuspenseQuery<{ Employee: IEmployee }>(
-    GET_EMPLOYEE_QUERY,
-    {
-      variables: { id: params.id },
-    }
-  );
+import { getClient } from "@/lib/client";
+
+export const revalidate = 5;
+
+const Page = async ({ params }: { params: { id: string } }) => {
+  const { data } = await getClient().query({
+    query: GET_EMPLOYEE_QUERY,
+    variables: { id: params.id },
+  });
+
   const employee = data.Employee;
-  if (employee === null) return redirect("/");
+
+  if (employee === null) redirect("/");
 
   return (
     <>
