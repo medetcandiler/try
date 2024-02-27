@@ -8,7 +8,7 @@ export const fetcher = async <T = any>(body: string): Promise<T> => {
     const res = await fetch(url, {
       method: method,
       headers: { "Content-Type": "application/json" },
-      cache: "no-store",
+      next: { revalidate: 5 },
       body,
     });
     const { data } = await res.json();

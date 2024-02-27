@@ -6,7 +6,19 @@ import { sorter } from "@/lib/sorter";
 export const fetchEmployees = async () => {
   try {
     const res = await fetcher<{ allEmployees: IEmployees }>(
-      JSON.stringify({ query: GET_EMPLOYEES_QUERY })
+      JSON.stringify({
+        query: `
+      query GetEmployees {
+        allEmployees {
+          id,
+          name,
+          jobTitle,
+          avatar,
+          votes 
+        }
+      }
+    `,
+      })
     );
     const { allEmployees } = res;
 

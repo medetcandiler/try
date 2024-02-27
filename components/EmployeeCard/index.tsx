@@ -83,12 +83,13 @@ const EmployeeCard: FC<IEmployee> = ({ id, name, jobTitle, avatar, votes }) => {
   const [localeVote, setLocaleVote] = useState(votes);
   const handleUpVote = async () => {
     try {
-      await fetcher(
+      const res = await fetcher(
         JSON.stringify({
           query: UPVOTE_EMPLOYEE_MUTATION,
           variables: { id, votes: localeVote + 1 },
         })
       );
+      console.log(res);
       const { Employee } = await fetcher(
         JSON.stringify({
           query: `query GetEmployee($id: ID!) {

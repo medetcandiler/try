@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-export const url = "http://localhost:4002/graphql";
+export const url = "http://localhost:4005/graphql";
 export const GET_EMPLOYEES_QUERY = gql`
   query GetEmployees {
     allEmployees {
